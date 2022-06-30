@@ -1,7 +1,83 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;1,800&family=Montserrat:wght@300&display=swap');
+
+*,
+::after,
+::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/*TODO : change titiles to hx and set as globals params  */
+/*TODO : make tag segragation globals,main,button etc  */
+
+body {
+  background-color: #F5F7FB;
+  font-family: 'Karla', sans-serif
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+  max-width: 1000px;
+  color: #293264;
+}
+
+.question__container:after{
+  content :"";
+  display: block;
+  max-width: inherit;
+  height: 1px;
+  background: #DBDEF0;
+  opacity: 0.5;
+}
+
+.question__answerConatainer {
+  display: flex;  
+  margin: 15px 5px 15px 5px;
+}
+
+.question__answerConatainer > span {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  margin-right: 15px;
+  padding: 5px 25px;
+  border-radius: 8px;
+  border: 1px solid #4D5B9E;
+  cursor: pointer;  
+}
+
+.question__answerConatainer > span:hover {
+  background-color: #D6DBF5;
+  transition: all 0.5s ease-in-out;
+}
+
+.btn__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;  
+}
+
+.btn__container > button {
+  font-size: 12px;
+  border: none;
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  border-radius: 10px;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.btn__container > button:hover {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.2);
+}
+
 
 
