@@ -11,6 +11,7 @@
 /*TODO : change titiles to hx and set as globals params  */
 /*TODO : make tag segragation globals,main,button etc  */
 
+
 body {
   background-color: #F5F7FB;
   font-family: 'Karla', sans-serif
@@ -21,7 +22,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin: 50px auto;  
-  color: #293264;
+  color: #293264;  
 }
 
 .question__container:after{

@@ -12,21 +12,23 @@ function App() {
   const [initialData, setInitialData] = useState({
     loggedIn: true,    
   });
-  const [questions, setQuestions] = useState({});
-  const [isGameWon, setIsGameWon] = useState(false)
+  const [questions, setQuestions] = useState({});    
+  console.log("🚀 ~ file: App.js ~ line 16 ~ App ~ questions", questions)
+  const [isGameWon, setIsGameWon] = useState(false);
 
   const { loggedIn } = initialData;  
-  const { results } = questions; 
 
   useEffect(() => {
      getQuizQuestion()
-       .then(({data}) => setQuestions(data)) 
-  }, []);
-
-  console.log("🚀 ~ file: App.js ~ line 20 ~ App ~ result", results)
-
-
-  
+       .then(({results}) => setQuestions(results.map((result) =>{
+        const correctAnsw = {ans: result.correct_answer, isTrue: true};
+        const incorrectAnsw = result.incorrect_answers.map((answer, i) => ({ans: answer, isTrue: false }))
+        return {
+          question: result.question,
+          answers: [correctAnsw, ...incorrectAnsw]
+        }
+       }))) 
+  }, []);  
 
   return (
     <main className="App">
@@ -37,15 +39,15 @@ function App() {
           <Questions />
           <Questions />
           <Questions />
-          <div>Question: {questions[0]?.question}</div>      
-          {/* question comp os starting screen */}
+          <div>Question: {questions[0]?.question}</div>       
+          {/* question comp on starting screen */}
           <div className='btn__container'>
             {/* contidional score rendering */}
             {/* btn with conditional rendering text check answers -> play again */}
             {isGameWon && <h2>You scored 3/5 correct answers</h2>}
             <button className='app__btn'>test button</button>
           </div>
-          </>
+        </>
       :
         <StartingPage />
       }
