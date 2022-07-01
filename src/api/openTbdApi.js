@@ -1,13 +1,11 @@
 import axios from "axios";
 
 export const getQuizQuestion = () => {    
-    return axios.get('https://opentdb.com/api.php?amount=5&type=multiple')
-        .then(res => {
-            console.log(res);
-            return res;
+    return axios.get('https://opentdb.com/api.php?amount=4&type=multiple')
+        .then(res => {                     
+            return (res);
         })
         .catch(err => {
-            console.error(err)
-            return null;
+            console.error(err)            
         });
 }
