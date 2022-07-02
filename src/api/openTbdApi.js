@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getQuizQuestion = () => {    
-    return axios.get('https://opentdb.com/api.php?amount=6&type=multiple')
+export const getQuizQuestion = (amount, type) => {    
+    return axios.get(`https://opentdb.com/api.php?amount=${amount}&type=${type}`)
         .then(({data}) => {                     
             return data;
         })

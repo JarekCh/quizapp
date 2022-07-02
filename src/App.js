@@ -12,18 +12,22 @@ import { getQuizQuestion } from './api/openTbdApi';
 
 function App() {
   const [initialData, setInitialData] = useState({
-    loggedIn: true,    
+    loggedIn: true,
+    amount: '5',
+    type: 'multiple',
+    category: '0',
+    difficulty: 'easy'
   });
   const [questions, setQuestions] = useState(null);      
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
-  const [isGameWon, setIsGameWon] = useState(false);
+  const [isGameWon, setIsGameWon] = useState(true);
 
   //destructuring
-  const { loggedIn } = initialData;  
+  const { loggedIn, amount, type, difficulty, category } = initialData;  
   
 
   useEffect(() => {
-     getQuizQuestion()
+     getQuizQuestion(amount, type, category, difficulty)
        .then(({results}) => setQuestions(results.map((result) => {
         const correctAnsw = {          
           ans: result.correct_answer,
@@ -46,10 +50,12 @@ function App() {
       isAnswerChecked={isAnswerChecked}
       question={question.question}      
       key={question.id}
-      answer0={question.answers[0].ans} 
-      answer1={question.answers[1].ans}          
-      answer2={question.answers[2].ans} 
-      answer3={question.answers[3].ans}       
+      answer={[question.answers[0].ans,
+         question.answers[1].ans,
+         question.answers[2].ans,
+         question.answers[3].ans
+      ]} 
+     
     />
     )
   )
@@ -65,7 +71,7 @@ function App() {
           <div className='btn__container'>
             {/* contidional score rendering */}
             {/* btn with conditional rendering text check answers -> play again */}
-            {isGameWon && <h2>You scored 3/5 correct answers</h2>}
+            {isGameWon && <h2>You scored 3/{questions?.length} correct answers</h2>}
             <button className='app__btn'>test button</button>
           </div>
         </main>

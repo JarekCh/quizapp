@@ -22,11 +22,28 @@ body {
   align-items: center;   
   margin: 50px auto;  
   color: #293264;  
+  position: relative;
 }
+
+/* .App::before {
+  content: url('https://cdn.pixabay.com/photo/2022/06/15/14/05/scotland-7264042_960_720.jpg');
+  position: fixed;
+  bottom: -500px;
+  width: 40px;
+  height: 560px;
+
+} */
 
 .main__page {
   display: flex;
-  flex-direction: column;   
+  flex-direction: column;  
+  margin: 50px 75px; 
+}
+
+@media only screen and (min-width: 1200px) {
+  .main__page {    
+    margin: 50px auto; 
+  }
 }
 
 .question__container:after{
