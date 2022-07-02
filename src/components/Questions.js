@@ -1,17 +1,17 @@
 import React from 'react'
 
-const Questions = () => {
+const Questions = ( { isAnswerChecked, question, answer0, answer1, answer2, answer3 } ) => {
     // TODO : map over array question lenght (4/2 questions)
-
+    console.log( isAnswerChecked, question, answer0, answer1, answer2, answer3)
 
     return (
         <div className='question__container'>
-            <h2 className='question__title'>Nazwa pytania asdxzczzzzzzzzzzzzzzzzzzzzzz</h2>
+            <h2 className='question__title'>{question}</h2>
             <div className='question__answerConatainer'>
-                <span>odp 1asdasdass</span>
-                <span>odp 2xcccccccccccccccccc</span>
-                <span>odp 3bbbbbbbbbbbbbbbbbbbbbbbbbb</span>
-                <span>odp 4</span>
+                <span>{answer0}</span>
+                <span>{answer1}</span>
+                <span>{answer2}</span>
+                <span>{answer3}</span>
             </div>        
         </div>
     
