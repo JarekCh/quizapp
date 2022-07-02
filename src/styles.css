@@ -14,6 +14,7 @@
 
 body {
   background-color: #F5F7FB;
+  /* add gradient */
   font-family: 'Karla', sans-serif
 }
 
@@ -21,7 +22,6 @@ body {
   display: flex;
   align-items: center;   
   margin: 50px auto;  
-  color: #293264;  
   position: relative;
 }
 
@@ -35,9 +35,13 @@ body {
 } */
 
 .main__page {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;  
+  padding: 40px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;  
-  margin: 50px 75px; 
+  margin: 50px 75px;
+  color: #293264;  
 }
 
 @media only screen and (min-width: 1200px) {

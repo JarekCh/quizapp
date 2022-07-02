@@ -10,17 +10,20 @@ import { getQuizQuestion } from './api/openTbdApi';
 
 // TODO : map questions over sueState variable lenght
 
+const initialDataValue = {
+  loggedIn: true,
+  amount: '10',
+  type: 'multiple',
+  category: '0',
+  difficulty: 'easy'
+};
+
 function App() {
-  const [initialData, setInitialData] = useState({
-    loggedIn: true,
-    amount: '5',
-    type: 'multiple',
-    category: '0',
-    difficulty: 'easy'
-  });
+  const [initialData, setInitialData] = useState(initialDataValue);
   const [questions, setQuestions] = useState(null);      
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
-  const [isGameWon, setIsGameWon] = useState(true);
+  const [isGameWon, setIsGameWon] = useState(false);
+
 
   //destructuring
   const { loggedIn, amount, type, difficulty, category } = initialData;  
