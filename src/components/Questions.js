@@ -1,16 +1,20 @@
 import React from 'react'
 
-const Questions = ( { question, answers } ) => {
-    // const styles = {
-    //     backgroundColor: isHeld ? '#D6DBF5' : '',
-    //     border: 'none',
-    // }
+const Questions = ( { question, answers, holdAnswer } ) => {
 
-    const allAnswers = answers.map((answer) => (
-        <span
-            // style={styles}
-        >{answer.ans}</span>
-    ));
+    const allAnswers = answers.map((answer, i) => {
+        const styles = {
+            backgroundColor: answer.isHeld ? '#D6DBF5' : '',
+            border: answer.isHeld ? 'none': '',
+        }
+        return(<span
+                    style={styles}
+                    onClick={holdAnswer}
+                    key={i}
+                    data-id={answer.id}
+                >{answer.ans}</span>
+              )
+    });
     // TODO : map over array question lenght (4/2 questions)
     
 

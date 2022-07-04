@@ -12,7 +12,7 @@ import { getQuizQuestion } from './api/openTbdApi';
 
 const initialDataValue = {
   loggedIn: true,
-  amount: '10',
+  amount: '5',
   type: 'multiple',
   category: '0',
   difficulty: 'easy'
@@ -21,7 +21,9 @@ const initialDataValue = {
 function App() {
   const [initialData, setInitialData] = useState(initialDataValue);  
   const [questions, setQuestions] = useState(null);  
+  console.log("🚀 ~ file: App.js ~ line 24 ~ App ~ questions", questions)
   const [isGameWon, setIsGameWon] = useState(false);
+  
 
 
   //destructuring
@@ -51,19 +53,33 @@ function App() {
        }))) 
   }, [amount, type, difficulty, category]);  
 
-  function holdAnswer(id) {
-    setQuestions(oldQuestions => oldQuestions.map()
-    )
-  }
+  function holdAnswer(e) {  
+            
+    setQuestions(oldQuestions => oldQuestions.map(question => {
+      const some = question.answers.some(e => e.isHeld)
+      if(some) return question
+      
+      const answers = question.answers.map(answer => {
+        return answer.id === e ?
+          {...answer,   isHeld: !answer.isHeld} : answer
+      });
 
-  const displayQiestions = questions?.map(question =>  { 
+
+        return ({...question, answers});
+      
+    }));
+  }
+  
+
+  const displayQuestions = questions?.map(question =>  { 
     const { answers } = question; 
-    const testfun =  answers.map(answer => answer)
+    const dynamicAnswers =  answers.map(answer => answer)
 
     return  (<Questions
             question={question.question}      
             key={question.id}
-            answers={testfun}           
+            answers={dynamicAnswers}  
+            holdAnswer={(e) => holdAnswer(e.target.dataset.id)}  
           />
     )}
   );
@@ -73,7 +89,7 @@ function App() {
     <main className="App">
       {loggedIn ? 
         <main className='main__page'>
-          {displayQiestions}
+          {displayQuestions}
           {/* question comp on starting screen */}
           <div className='btn__container'>
             {/* contidional score rendering */}
