@@ -1,7 +1,16 @@
 import React from 'react'
 
-const Questions = ( { isAnswerChecked, question, answer } ) => {
-console.log("🚀 ~ file: Questions.js ~ line 4 ~ Questions ~ answer0", answer)
+const Questions = ( { question, answers } ) => {
+    // const styles = {
+    //     backgroundColor: isHeld ? '#D6DBF5' : '',
+    //     border: 'none',
+    // }
+
+    const allAnswers = answers.map((answer) => (
+        <span
+            // style={styles}
+        >{answer.ans}</span>
+    ));
     // TODO : map over array question lenght (4/2 questions)
     
 
@@ -9,10 +18,7 @@ console.log("🚀 ~ file: Questions.js ~ line 4 ~ Questions ~ answer0", answer)
         <div className='question__container'>
             <h2 className='question__title'>{question}</h2>
             <div className='question__answerConatainer'>
-                <span>{answer[0]}</span>
-                <span>{answer[1]}</span>
-                <span>{answer[2]}</span>
-                <span>{answer[3]}</span>
+                {allAnswers}  
             </div>        
         </div>
     

@@ -19,9 +19,8 @@ const initialDataValue = {
 };
 
 function App() {
-  const [initialData, setInitialData] = useState(initialDataValue);
-  const [questions, setQuestions] = useState(null);      
-  const [isAnswerChecked, setIsAnswerChecked] = useState(false);
+  const [initialData, setInitialData] = useState(initialDataValue);  
+  const [questions, setQuestions] = useState(null);  
   const [isGameWon, setIsGameWon] = useState(false);
 
 
@@ -33,12 +32,16 @@ function App() {
      getQuizQuestion(amount, type, category, difficulty)
        .then(({results}) => setQuestions(results.map((result) => {
         const correctAnsw = {          
+          id: nanoid(),
           ans: result.correct_answer,
-          isTrue: true          
+          isTrue: true,
+          isHeld: false        
         };
         const incorrectAnsw = result.incorrect_answers.map((answer, i) => ({ 
+          id: nanoid(),
           ans: answer, 
-          isTrue: false 
+          isTrue: false,
+          isHeld: false,
         }))
         return {
           id: nanoid(),
@@ -46,24 +49,25 @@ function App() {
           answers: [correctAnsw, ...incorrectAnsw]
         }
        }))) 
-  }, []);  
+  }, [amount, type, difficulty, category]);  
 
-  const displayQiestions = questions?.map(question =>    
-   (<Questions       
-      isAnswerChecked={isAnswerChecked}
-      question={question.question}      
-      key={question.id}
-      answer={[question.answers[0].ans,
-         question.answers[1].ans,
-         question.answers[2].ans,
-         question.answers[3].ans
-      ]} 
-     
-    />
+  function holdAnswer(id) {
+    setQuestions(oldQuestions => oldQuestions.map()
     )
-  )
-  
-  console.log(displayQiestions)
+  }
+
+  const displayQiestions = questions?.map(question =>  { 
+    const { answers } = question; 
+    const testfun =  answers.map(answer => answer)
+
+    return  (<Questions
+            question={question.question}      
+            key={question.id}
+            answers={testfun}           
+          />
+    )}
+  );
+ 
 
   return (
     <main className="App">
