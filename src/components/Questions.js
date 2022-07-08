@@ -1,9 +1,14 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 
-const Questions = ( { question, answers, holdAnswer } ) => {
+const Questions = ( { question, answers, holdAnswer, isGameWon} ) => {
 
-    const allAnswers = answers.map((answer, i) => {
-        const styles = {
+    useEffect(() => {
+        console.log('gra sie')
+    }, [isGameWon])
+    
+
+    const allAnswers =  answers.map((answer, i) => {
+        let styles = {
             backgroundColor: answer.isHeld ? '#D6DBF5' : '',
             border: answer.isHeld ? 'none': '',
         }
@@ -14,8 +19,7 @@ const Questions = ( { question, answers, holdAnswer } ) => {
                     data-id={answer.id}
                 >{answer.ans}</span>
               )
-    });
-    // TODO : map over array question lenght (4/2 questions)
+    });    
     
 
     return (

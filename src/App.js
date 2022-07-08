@@ -20,9 +20,9 @@ const initialDataValue = {
 
 function App() {
   const [initialData, setInitialData] = useState(initialDataValue);  
-  const [questions, setQuestions] = useState(null);  
-  console.log("🚀 ~ file: App.js ~ line 24 ~ App ~ questions", questions)
+  const [questions, setQuestions] = useState(null);      
   const [isGameWon, setIsGameWon] = useState(false);
+  const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
   
 
 
@@ -53,8 +53,7 @@ function App() {
        }))) 
   }, [amount, type, difficulty, category]);  
 
-  function holdAnswer(e) {  
-            
+  function holdAnswer(e) {              
     setQuestions(oldQuestions => oldQuestions.map(question => {
       const some = question.answers.some(e => e.isHeld)
       if(some) return question
@@ -64,14 +63,23 @@ function App() {
           {...answer,   isHeld: !answer.isHeld} : answer
       });
 
-
-        return ({...question, answers});
-      
+        return ({...question, answers});      
     }));
   }
-  
 
-  const displayQuestions = questions?.map(question =>  { 
+  function checkAnswers() {
+      if(correctAnswerCount === questions.length)  
+      for(let i = 0; i < questions.length; i++) {
+        questions[i].answers.forEach((answer) => {
+          if(answer.isTrue && answer.isHeld) {
+            setCorrectAnswerCount((prevCount => prevCount + 1));
+          };
+        });
+      };
+      setIsGameWon(true)
+  };  
+
+  const displayQuestions =  questions?.map(question =>  { 
     const { answers } = question; 
     const dynamicAnswers =  answers.map(answer => answer)
 
@@ -79,11 +87,11 @@ function App() {
             question={question.question}      
             key={question.id}
             answers={dynamicAnswers}  
-            holdAnswer={(e) => holdAnswer(e.target.dataset.id)}  
+            holdAnswer={(e) => holdAnswer(e.target.dataset.id)}
+            isGameWon={isGameWon}            
           />
     )}
-  );
- 
+  ); 
 
   return (
     <main className="App">
@@ -94,8 +102,8 @@ function App() {
           <div className='btn__container'>
             {/* contidional score rendering */}
             {/* btn with conditional rendering text check answers -> play again */}
-            {isGameWon && <h2>You scored 3/{questions?.length} correct answers</h2>}
-            <button className='app__btn'>test button</button>
+            {isGameWon && <h2>You scored {correctAnswerCount}/{questions?.length} correct answers</h2>}
+            <button className='app__btn' onClick={checkAnswers}>{isGameWon ? 'Play again' : 'Check answers'}</button>
           </div>
         </main>
       :
