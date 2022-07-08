@@ -6,19 +6,19 @@ import { nanoid } from 'nanoid';
 import './styles.css';
 import { getQuizQuestion } from './api/openTbdApi';
 
-
-
-// TODO : map questions over sueState variable lenght
-
-const initialDataValue = {
-  loggedIn: true,
-  amount: '5',
-  type: 'multiple',
-  category: '0',
-  difficulty: 'easy'
-};
+// TODO:
+// add logout button
+// add functionality to add_btn set initialDataValue and back to starting screen
 
 function App() {
+  const initialDataValue = {
+    loggedIn: false,
+    amount: '5',
+    type: 'multiple',
+    category: '0',
+    difficulty: 'easy'
+  };
+
   const [initialData, setInitialData] = useState(initialDataValue);  
   const [questions, setQuestions] = useState(null);      
   const [isGameWon, setIsGameWon] = useState(false);
@@ -68,7 +68,7 @@ function App() {
   }
 
   function checkAnswers() {
-      if(correctAnswerCount === questions.length)  
+      if(isGameWon) return  
       for(let i = 0; i < questions.length; i++) {
         questions[i].answers.forEach((answer) => {
           if(answer.isTrue && answer.isHeld) {
@@ -77,11 +77,12 @@ function App() {
         });
       };
       setIsGameWon(true)
-  };  
+  };    
+
 
   const displayQuestions =  questions?.map(question =>  { 
     const { answers } = question; 
-    const dynamicAnswers =  answers.map(answer => answer)
+    const dynamicAnswers =  answers.map(answer => answer);
 
     return  (<Questions
             question={question.question}      
