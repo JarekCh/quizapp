@@ -33,7 +33,7 @@ export const filterData = [
         { name: 'Comics', value: '29' },
         { name: 'Science: Gadgets', value: '30' },
         { name: 'Japanes Anime & Manga', value: '31' },
-        { name: 'Cartoon & Animation', value: '30' },
+        { name: 'Cartoon & Animation', value: '32' },
         
       ],
       placeholder: 'Category',

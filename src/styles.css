@@ -15,7 +15,7 @@
 body {
   background-color: #F5F7FB;
   /* add gradient */
-  font-family: 'Karla', sans-serif
+  font-family: 'Karla', sans-serif  
 }
 
 .App {
@@ -33,6 +33,13 @@ body {
   height: 560px;
 
 } */
+
+.startingPage__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
 
 .main__page {
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;  

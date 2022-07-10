@@ -16,7 +16,8 @@ function App() {
     amount: '5',
     type: 'multiple',
     category: '0',
-    difficulty: 'easy'
+    difficulty: 'easy',
+    name: 'John Doe',
   };
 
   const [initialData, setInitialData] = useState(initialDataValue);  
@@ -104,7 +105,10 @@ function App() {
             {/* contidional score rendering */}
             {/* btn with conditional rendering text check answers -> play again */}
             {isGameWon && <h2>You scored {correctAnswerCount}/{questions?.length} correct answers</h2>}
-            <button className='app__btn' onClick={checkAnswers}>{isGameWon ? 'Play again' : 'Check answers'}</button>
+            <button 
+              className='app__btn' 
+              onClick={checkAnswers}>{isGameWon ? 'Play again' : 'Check answers'}
+            </button>
           </div>
         </main>
       :
