@@ -7,8 +7,8 @@ import './styles.css';
 import { getQuizQuestion } from './api/openTbdApi';
 
 // TODO:
-// add logout button
-// add functionality to add_btn set initialDataValue and back to starting screen
+// local storage, add another button, back to starting screen add same condition form localstorage
+
 
 function App() {
   const initialDataValue = {
@@ -20,15 +20,15 @@ function App() {
     name: 'John Doe',
   };
 
-  const [initialData, setInitialData] = useState(initialDataValue);  
-  const [questions, setQuestions] = useState(null);      
+  const [initialData, setInitialData] = useState(initialDataValue);      
+  const [questions, setQuestions] = useState(null);    
   const [isGameWon, setIsGameWon] = useState(false);
   const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
   
 
 
   //destructuring
-  const { loggedIn, amount, type, difficulty, category } = initialData;  
+  const { loggedIn, amount, type, difficulty, category, name } = initialData;  
   
 
   useEffect(() => {
@@ -46,16 +46,19 @@ function App() {
           isTrue: false,
           isHeld: false,
         }))
+        const rand =[correctAnsw, ...incorrectAnsw].sort(() => Math.random() - 0.5);
         return {
           id: nanoid(),
           question: result.question,
-          answers: [correctAnsw, ...incorrectAnsw]
+          answers: rand
         }
        }))) 
   }, [amount, type, difficulty, category]);  
 
-  function initialDataSetter(...args){
-    setInitialData(...args)
+
+  function initialDataSetter(...args){    
+    setInitialData(...args);
+    setIsGameWon(false);
   }
 
   function holdAnswer(e) {   
@@ -74,7 +77,9 @@ function App() {
   }
 
   function checkAnswers() {
-      if(isGameWon) return  
+      if(isGameWon) {
+        setInitialData(initialDataValue);
+      }  
       for(let i = 0; i < questions.length; i++) {
         questions[i].answers.forEach((answer) => {
           if(answer.isTrue && answer.isHeld) {
@@ -83,12 +88,11 @@ function App() {
         });
       };
       setIsGameWon(true)
-  };    
-
+  };   
 
   const displayQuestions =  questions?.map(question =>  { 
     const { answers } = question; 
-    const dynamicAnswers =  answers.map(answer => answer);
+    const dynamicAnswers =  answers.map(answer => answer);        
 
     return  (<Questions
             question={question.question}      
@@ -104,12 +108,9 @@ function App() {
     <main className="App">
       {loggedIn ? 
         <main className='main__page'>
-          {displayQuestions}
-          {/* question comp on starting screen */}
-          <div className='btn__container'>
-            {/* contidional score rendering */}
-            {/* btn with conditional rendering text check answers -> play again */}
-            {isGameWon && <h2>You scored {correctAnswerCount}/{questions?.length} correct answers</h2>}
+          {displayQuestions}          
+          <div className='btn__container'>   
+            {isGameWon && <h2>{name}, you scored {correctAnswerCount}/{questions?.length} correct answers</h2>}
             <button 
               className='app__btn' 
               onClick={checkAnswers}>{isGameWon ? 'Play again' : 'Check answers'}

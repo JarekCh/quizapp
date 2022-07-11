@@ -5,12 +5,13 @@ import { filterData } from '../utils/filterData'
 
 //TODO:
 // structure with animation 
-// form passing data to app
+// set check func for value = ''
+// set css
 
 const StartingPage = ( { initialDataSetter } ) => {
   const [filters] = useState(filterData);
   const [formData, setFormData] = useState({
-    loggedIn: false,
+    loggedIn: true,
     amount: '',
     type: '',
     category: '',
@@ -29,17 +30,10 @@ const StartingPage = ( { initialDataSetter } ) => {
   });
   };
 
-   function handleSubmit(e) {
-      e.preventDefault()   
-      setFormData((prevFormData => {
-        return {
-          ...prevFormData,
-          loggedIn: true,
-        }
-      }));
-      initialDataSetter(formData);
-    }    
-   
+  function handleSubmit(e) {
+    e.preventDefault()   
+    initialDataSetter(formData);
+  }     
 
 
   

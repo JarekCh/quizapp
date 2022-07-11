@@ -9,7 +9,7 @@ const Questions = ( { question, answers, holdAnswer, isGameWon} ) => {
             backgroundColor: answer.isHeld ? '#D6DBF5' : '',
             border: answer.isHeld ? 'none': '',
         }
-        if(isTrue && isHeld && isGameWon){
+        if((isTrue && isHeld && isGameWon) || (isTrue && !isHeld && isGameWon)){
             styles={
                 backgroundColor: '#94D7A2',
                 border: 'none',
