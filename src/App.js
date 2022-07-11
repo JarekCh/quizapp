@@ -54,7 +54,12 @@ function App() {
        }))) 
   }, [amount, type, difficulty, category]);  
 
-  function holdAnswer(e) {              
+  function initialDataSetter(...args){
+    setInitialData(...args)
+  }
+
+  function holdAnswer(e) {   
+    if(isGameWon) return            
     setQuestions(oldQuestions => oldQuestions.map(question => {
       const some = question.answers.some(e => e.isHeld)
       if(some) return question
@@ -112,7 +117,9 @@ function App() {
           </div>
         </main>
       :
-        <StartingPage />
+        <StartingPage 
+          initialDataSetter={initialDataSetter}
+        />
       }
     </main>
   );

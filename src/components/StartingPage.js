@@ -7,7 +7,7 @@ import { filterData } from '../utils/filterData'
 // structure with animation 
 // form passing data to app
 
-const StartingPage = () => {
+const StartingPage = ( { initialDataSetter } ) => {
   const [filters] = useState(filterData);
   const [formData, setFormData] = useState({
     loggedIn: false,
@@ -17,6 +17,7 @@ const StartingPage = () => {
     difficulty: '',
     name: '',
   })
+  console.log("🚀 ~ file: StartingPage.js ~ line 20 ~ StartingPage ~ formData", formData)
 
   function handleChange(e) {
     const {name, value, } = e.target;
@@ -25,17 +26,23 @@ const StartingPage = () => {
           ...prevFormData,
           [name]: value
       }
-  })
-  }
+  });
+  };
 
-  // // function handleSubmit() {
-  //   const {name, value} = event.target
-  //   setMeme(prevMeme => ({
-  //       ...prevMeme,
-  //       [name]: value
-  //   }))    
-  // // }
-  console.log(formData)
+   function handleSubmit(e) {
+      e.preventDefault()   
+      setFormData((prevFormData => {
+        return {
+          ...prevFormData,
+          loggedIn: true,
+        }
+      }));
+      initialDataSetter(formData);
+    }    
+   
+
+
+  
   
   return (
     <main className='startingPage__container'>
@@ -46,25 +53,57 @@ const StartingPage = () => {
         <span>Z</span>
       </h1> 
       <div>
-        {filters?.map((filter) => (
-          <div key={filter.queryName}>
-            <select
-              placeholder={filter.placeholder}              
-              value={formData.queryName}
-              name={filter.queryName}
-              onChange={handleChange}
-            >
-              {filter?.items?.map((item) => (
-                <option
-                  value={item.value}
-                  key={item.value}
-                >
-                  {item.name}
-                </option>
-              ))}
-            </select>      
-          </div>     
-        ))}
+        <form onSubmit={handleSubmit}>
+          <label htmlFor='name'>Type nickname:</label>
+          <br />
+          <input 
+            id='name'
+            type='text'
+            placeholder='Name'
+            onChange={handleChange}
+            value={formData.name}
+            name="name"
+          />
+          <br />
+
+          <label htmlFor='amount'>Amount of questions in quiz:</label>
+          <br />
+          <input
+            id='amount'
+            type='text'
+            placeholder='pick number 3-15'
+            onChange={handleChange}
+            value={formData.amount}
+            name="amount"            
+          />          
+
+          <label></label>
+          {filters?.map((filter) => (
+            <>
+            <div key={filter.queryName}>
+              <label htmlFor={filter.queryName}>{filter.placeholder}:</label>
+              <br />
+              <select
+                id={filter.queryName}
+                placeholder={filter.placeholder}              
+                value={formData.queryName}
+                name={filter.queryName}
+                onChange={handleChange}
+              >
+                {filter?.items?.map((item) => (
+                  <option
+                    value={item.value}
+                    key={item.value}
+                  >
+                    {item.name}
+                  </option>
+                ))}
+              </select>      
+            </div>  
+            </>   
+          ))}
+          <button type='submit'>Start Quiz</button>
+        </form>
       </div>
     </main>
   )

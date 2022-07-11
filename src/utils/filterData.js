@@ -1,6 +1,7 @@
 export const filterData = [
     {
       items: [
+        { name: 'Select...', value: '' },
         { name: 'Easy', value: 'easy' },
         { name: 'Medium', value: 'medium' },
         { name: 'Hard', value: 'hard' },
@@ -10,6 +11,7 @@ export const filterData = [
     },
     {
       items: [
+        { name: 'Select...', value: '' },
         { name: 'General Knowlage', value: '9' },
         { name: 'Books', value: '10' },
         { name: 'Films', value: '11' },
@@ -41,6 +43,7 @@ export const filterData = [
     },
     {
       items: [
+        { name: 'Select...', value: '' },
         { name: 'Multiple Choice', value: 'multiple' },
         { name: 'Ture / False', value: 'boolean' },
       ],
