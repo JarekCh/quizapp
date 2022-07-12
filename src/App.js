@@ -20,7 +20,8 @@ function App() {
     name: 'John Doe',
   };
 
-  const [initialData, setInitialData] = useState(initialDataValue);      
+  const [initialData, setInitialData] = useState(
+    JSON.parse(localStorage.getItem("initialData")) || {});      
   const [questions, setQuestions] = useState(null);    
   const [isGameWon, setIsGameWon] = useState(false);
   const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
@@ -55,6 +56,11 @@ function App() {
        }))) 
   }, [amount, type, difficulty, category]);  
 
+  useEffect(() => {
+    localStorage.setItem("initialData", JSON.stringify(initialData))
+  }, [initialData])
+  
+
 
   function initialDataSetter(...args){    
     setInitialData(...args);
@@ -77,8 +83,8 @@ function App() {
   }
 
   function checkAnswers() {
-      if(isGameWon) {
-        setInitialData(initialDataValue);
+      if(isGameWon) {        
+        window.location.reload(false);
       }  
       for(let i = 0; i < questions.length; i++) {
         questions[i].answers.forEach((answer) => {
@@ -88,7 +94,11 @@ function App() {
         });
       };
       setIsGameWon(true)
-  };   
+  };  
+  
+  function setNewParams() {
+    setInitialData(initialDataValue);
+  }
 
   const displayQuestions =  questions?.map(question =>  { 
     const { answers } = question; 
@@ -110,6 +120,8 @@ function App() {
         <main className='main__page'>
           {displayQuestions}          
           <div className='btn__container'>   
+            <button className='app_btn'
+               onClick={setNewParams}>Set new parameters</button>
             {isGameWon && <h2>{name}, you scored {correctAnswerCount}/{questions?.length} correct answers</h2>}
             <button 
               className='app__btn' 

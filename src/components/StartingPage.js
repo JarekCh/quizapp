@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { filterData } from '../utils/filterData'
 
 
 
 //TODO:
 // structure with animation 
-// set check func for value = ''
 // set css
 
 const StartingPage = ( { initialDataSetter } ) => {
@@ -17,8 +16,8 @@ const StartingPage = ( { initialDataSetter } ) => {
     category: '',
     difficulty: '',
     name: '',
-  })
-  console.log("🚀 ~ file: StartingPage.js ~ line 20 ~ StartingPage ~ formData", formData)
+  });
+  const changeNumber = useRef();
 
   function handleChange(e) {
     const {name, value, } = e.target;
@@ -27,16 +26,18 @@ const StartingPage = ( { initialDataSetter } ) => {
           ...prevFormData,
           [name]: value
       }
-  });
-  };
+    });
+  }; 
 
-  function handleSubmit(e) {
-    e.preventDefault()   
+  function handleSubmit(e) {    
+    e.preventDefault()
+    if(formData.amount < 3 || formData.amount >= 15) {
+      changeNumber.current.focus();
+      changeNumber.current.value = 'pick number, 3-15'
+      return
+    }
     initialDataSetter(formData);
-  }     
-
-
-  
+  };  
   
   return (
     <main className='startingPage__container'>
@@ -52,11 +53,12 @@ const StartingPage = ( { initialDataSetter } ) => {
           <br />
           <input 
             id='name'
+            name="name" 
             type='text'
             placeholder='Name'
-            onChange={handleChange}
+            onChange={handleChange}            
             value={formData.name}
-            name="name"
+            required = {true}                       
           />
           <br />
 
@@ -68,12 +70,13 @@ const StartingPage = ( { initialDataSetter } ) => {
             placeholder='pick number 3-15'
             onChange={handleChange}
             value={formData.amount}
-            name="amount"            
+            name="amount"  
+            required = {true}  
+            ref={changeNumber}
           />          
 
           <label></label>
-          {filters?.map((filter) => (
-            <>
+          {filters?.map((filter) => (            
             <div key={filter.queryName}>
               <label htmlFor={filter.queryName}>{filter.placeholder}:</label>
               <br />
@@ -83,6 +86,7 @@ const StartingPage = ( { initialDataSetter } ) => {
                 value={formData.queryName}
                 name={filter.queryName}
                 onChange={handleChange}
+                required = {true}  
               >
                 {filter?.items?.map((item) => (
                   <option
@@ -93,8 +97,7 @@ const StartingPage = ( { initialDataSetter } ) => {
                   </option>
                 ))}
               </select>      
-            </div>  
-            </>   
+            </div>                
           ))}
           <button type='submit'>Start Quiz</button>
         </form>
