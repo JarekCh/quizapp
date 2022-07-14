@@ -6,9 +6,6 @@ import { nanoid } from 'nanoid';
 import './styles.css';
 import { getQuizQuestion } from './api/openTbdApi';
 
-// TODO:
-// local storage, add another button, back to starting screen add same condition form localstorage
-
 
 function App() {
   const initialDataValue = {

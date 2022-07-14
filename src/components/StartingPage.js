@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react'
-import { filterData } from '../utils/filterData'
-
-
+import React, { useState, useRef } from 'react';
+import { filterData } from '../utils/filterData';
+import { motion } from 'framer-motion';
+import { FaCheck, FaQuestion, FaExclamation } from 'react-icons/fa';
 
 //TODO:
 // structure with animation 
@@ -40,12 +40,23 @@ const StartingPage = ( { initialDataSetter } ) => {
   };  
   
   return (
-    <main className='startingPage__container'>
+    <main className='startingPage__container'>            
+      <div className='startingPage__animationContainer'>              
+        <motion.div className='startingPage__okCloud'>   
+          <FaCheck />      
+        </motion.div>
+        <motion.div className='startingPage__questionMarkCloud'>
+          <FaQuestion />
+        </motion.div>
+        <motion.div className='startingPage__exclamationMarkCloud'>
+          <FaExclamation />
+        </motion.div>
+      </div>
       <h1>
-        <span>Q</span>
-        <span>U</span>
-        <span>I</span>
-        <span>Z</span>
+        <span className='startingPage__letterGreen'>Q</span>
+        <span className='startingPage__letterRed'>U</span>
+        <span className='startingPage__letterGreen'>I</span>
+        <span className='startingPage__letterRed'>Z</span>
       </h1> 
       <div>
         <form onSubmit={handleSubmit}>
