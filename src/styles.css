@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;1,800&family=Montserrat:wght@300&family=Ribeye+Marrow&display=swap');
 
+:root {
+  --green: rgb(107, 180, 107);
+  --red: rgb(218, 132, 132);
+  --blue: rgb(71, 71, 190);
+}
 
 /* GLOBAL */
 
@@ -31,26 +36,43 @@ body {
   flex-direction: column;
 }
 
-.tartingPage__animationContainer {
+.startingPage__animationContainer {
   display: flex;
+  gap: 40px;
 }
 
 .startingPage__okCloud, .startingPage__exclamationMarkCloud, .startingPage__questionMarkCloud {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 1px black solid;
+  justify-content: center;  
   border-radius: 20px;
   height: 50px;
   width: 80px;
+  color: #F5F7FB;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.startingPage__okCloud {
+  background-color: var(--green);
+  transform: rotate(-15deg);  
+  }
+
+.startingPage__questionMarkCloud {
+  background-color: var(--red); 
+}
+
+.startingPage__exclamationMarkCloud {
+  background-color: var(--blue);
+  transform: rotate(15deg);
 }
 
 .startingPage__letterGreen {
-  color: rgb(107, 180, 107);
+  color: var(--green);
 }
 
 .startingPage__letterRed {
-  color: rgb(218, 132, 132);
+  color: var(--red);
 }
 
 
