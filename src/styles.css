@@ -31,7 +31,7 @@ body {
 
 .startingPage__container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
 }
 
 .startingPage__animationContainer {
@@ -52,8 +52,7 @@ body {
 }
 
 .startingPage__okCloud {
-  background-color: var(--green);
-  transform: rotate(-15deg);  
+  background-color: var(--green);  
   }
 
 .startingPage__questionMarkCloud {
@@ -61,8 +60,7 @@ body {
 }
 
 .startingPage__exclamationMarkCloud {
-  background-color: var(--blue);
-  transform: rotate(15deg);
+  background-color: var(--blue);  
 }
 
 .startingPage__letterGreen {
