@@ -21,13 +21,11 @@ h1 {
   font-size: 100px;
 }
 
+
 body {
-  background: linear-gradient(to bottom right, rgb(250, 250, 250), rgb(196, 188, 188)) fixed;  
+  background: linear-gradient(to bottom right, rgb(250, 250, 250), rgb(207, 205, 226)) fixed;  
   font-family: 'Karla', sans-serif  
 }
-
-/*TODO : change titiles to hx and set as globals params  */
-/*TODO : make tag segragation globals,main,button etc  */
 
 /* Starting Page */
 
@@ -75,6 +73,48 @@ body {
   color: var(--red);
 }
 
+/* FORM */
+
+.form__container {
+  margin-top: 40px;
+  letter-spacing: 1px;
+}
+
+.form__container > form > input, select {
+  width: 240px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid black;
+  border-color : transparent;
+  font-size: 20px;
+  margin: 5px 0 25px 0;
+  background-color: #F5F7FB;
+  padding: 5px;
+}
+
+.form__container > form > label, .form__select > label {  
+  font-weight: 600;
+}
+
+.form__container > form > input:focus, select:focus {
+  outline-color: var(--green);
+}
+
+.form__container > form > button {
+  margin-top: 20px;
+  width: 240px;
+  height: 52px;
+  border-radius: 15px;
+  background-color: var(--green);
+  border: none;
+  font-size: 30px;
+}
+
+.form__container > form > button:hover {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.2);
+}
+
 
 /* APP */
 
@@ -85,13 +125,25 @@ body {
   position: relative;
 }
 
-/* .App::before {
-  content: url('https://cdn.pixabay.com/photo/2022/06/15/14/05/scotland-7264042_960_720.jpg');
+.App::before {
+  content: url('./img/blobs.png');
   position: fixed;
-  bottom: -500px;
+  bottom: -550px;
+  left: -80px;
   width: 40px;
   height: 560px;
-} */
+  transform: rotate(-40deg);
+  z-index: -1;
+}
+
+.App::after {
+  content: url('./img/blobs\(2\).png');
+  position: fixed;
+  transform: rotate(-10deg);
+  top: -200px;
+  right: -200px;
+  z-index: -1;  
+}
 
 .startingPage__container {
   display: flex;
@@ -123,6 +175,7 @@ body {
   height: 1px;
   background: #a5acda;
   opacity: 0.5;   
+  z-index: 99;
 }
 
 .question__answerConatainer {

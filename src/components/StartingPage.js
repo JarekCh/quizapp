@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { FaCheck, FaQuestion, FaExclamation } from 'react-icons/fa';
 
 //TODO:
-// structure with animation 
-// set css
+// set css for form
+// make new component for form
 
 const StartingPage = ( { initialDataSetter } ) => {
   const [filters] = useState(filterData);
@@ -31,9 +31,9 @@ const StartingPage = ( { initialDataSetter } ) => {
 
   function handleSubmit(e) {    
     e.preventDefault()
-    if(formData.amount < 3 || formData.amount >= 15) {
+    if(formData.amount < 3 || formData.amount > 15) {
       changeNumber.current.focus();
-      changeNumber.current.value = 'pick number, 3-15'
+      changeNumber.current.value = 'Pick number, 3-15'
       return
     }
     initialDataSetter(formData);
@@ -99,7 +99,7 @@ const StartingPage = ( { initialDataSetter } ) => {
         <span className='startingPage__letterGreen'>I</span>
         <span className='startingPage__letterRed'>Z</span>
       </motion.h1> 
-      <div>
+      <div className='form__container'>
         <form onSubmit={handleSubmit}>
           <label htmlFor='name'>Type nickname:</label>
           <br />
@@ -119,17 +119,16 @@ const StartingPage = ( { initialDataSetter } ) => {
           <input
             id='amount'
             type='text'
-            placeholder='pick number 3-15'
+            placeholder='Pick number 3-15'
             onChange={handleChange}
             value={formData.amount}
             name="amount"  
             required = {true}  
             ref={changeNumber}
-          />          
-
-          <label></label>
+          />     
+          
           {filters?.map((filter) => (            
-            <div key={filter.queryName}>
+            <div key={filter.queryName} className='form__select'>
               <label htmlFor={filter.queryName}>{filter.placeholder}:</label>
               <br />
               <select
@@ -151,7 +150,7 @@ const StartingPage = ( { initialDataSetter } ) => {
               </select>      
             </div>                
           ))}
-          <button type='submit'>Start Quiz</button>
+          <button type='submit'>Start quiz</button>
         </form>
       </div>
     </main>
