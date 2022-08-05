@@ -1,17 +1,19 @@
 # Quizz App
-Quiz application that allows to user set parameters like name, amount of questions, difficulty, category and type answer multiple choice or true/false. Application will remmember previous setting and is fully responsive.
+
+Quiz application that allows to user set parameters like name, amount of questions, difficulty, category and type answer multiple choice or true/false. Application will remember previous setting and is fully responsive.
 
 # Technologies
+
 - React
 - JS
 - HTML & CSS
 - React icons
-- Framer motion 
+- Framer motion
 - Axios
 
 # Live
-https://jcquizapp.netlify.app/
 
+https://jcquizapp.netlify.app/
 
 ## Available Scripts
 
@@ -41,4 +43,3 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
-
